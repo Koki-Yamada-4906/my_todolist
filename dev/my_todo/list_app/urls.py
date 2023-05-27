@@ -7,3 +7,4 @@ from django.conf import settings
 app_name = "App"
 
 urlpatterns = [path('', views.home_view, name='home'),]
+
