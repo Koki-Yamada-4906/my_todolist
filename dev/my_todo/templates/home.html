@@ -1,31 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>ToDoリスト</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-  <header class="bg-gray-500">
-    <h1>ToDoリスト</h1>
-  </header>
-    <div style="float: right; width: 50%;">
-      <h2>新しいタスクの追加</h2>
-      <form action="" method="post">
-        {% csrf_token %}
-        <input type="text" name="task_name" placeholder="タスク名" required>
-        <button type="submit">追加</button>
-
-      <h2>タスク一覧</h2>
-      <ul>
-        <li>タスク1</li>
-        <li>タスク2</li>
-        <li>タスク3</li>
-      </ul>
-      </form>
+  </head>
+  <body>
+    <header class="bg-gray-500">
+      <h1>ToDoリスト</h1>
+    </header>
+    <div class="flex h-full w-full">
+      <div id="left-panel" class="flex left-panel items-start w-1/5 bg-gray-300 min-w-32">
+        <div class="flex mx-auto justify-center items-start bg-white mt-3 rounded-md">
+          <form class="flex mx-auto justify-center items-start" method="POST" action="{% url 'App:create_project' %}">
+            {% csrf_token %}
+            <input type="text" class="mt-[6px] ml-1 whitespace-nowrap focus:outline-none" name="name" placeholder="新規プロジェクト名">
+            <button type="submit" class="whitespace-nowrap mt-[4px] text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-2.5 py-1 text-center mr-2 mb-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+          </form>
+          
+        </div>
+        <form method="POST" action="{% url 'App:delete' %}">
+          {% csrf_token %}
+          <button type="submit">レコードを削除する</button>
+        </form>
+      </div>
+      
+      
+      <main id="right-panel" class="right-panel flex w-full bg-gray-700">
+        <h2>新しいタスクの追加</h2>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="text" name="task_name" placeholder="タスク名" required>
+          <button type="submit">追加</button>
+          
+          <h2>タスク一覧</h2>
+          <ul>
+            <li>タスク1</li>
+            <li>タスク2</li>
+            <li>タスク3</li>
+          </ul>
+        </form>
+      </main>
     </div>
-    <div style="float: left; width: 50%;">
-      <h1>左</h1>
-    </div>
-</body>
-</html>
+  </body>
+  </html>
+  
