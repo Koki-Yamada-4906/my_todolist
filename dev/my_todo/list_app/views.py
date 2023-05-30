@@ -2,10 +2,6 @@ from django.shortcuts import render, redirect
 from .forms import ProjectForm
 from .models import ProjectLists
 
-def home_view(request):
-    
-    return render(request, 'home.html')
-
 def create_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST)
@@ -21,3 +17,7 @@ def create_project(request):
 def delete_view(request):
     ProjectLists.objects.all().delete()
     return redirect('App:home')
+
+def project_lists_view(request):
+    project_lists = ProjectLists.objects.order_by('-updated_at')
+    return render(request, 'home.html', {'project_lists': project_lists})

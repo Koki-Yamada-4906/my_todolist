@@ -11,7 +11,7 @@
       <h1>ToDoリスト</h1>
     </header>
     <div class="flex h-full w-full">
-      <div id="left-panel" class="flex left-panel items-start w-1/5 bg-gray-300 min-w-32">
+      <div id="left-panel" class="flex flex-col left-panel items-start w-1/5 bg-gray-300 min-w-32">
         <div class="flex mx-auto justify-center items-start bg-white mt-3 rounded-md">
           <form class="flex mx-auto justify-center items-start" method="POST" action="{% url 'App:create_project' %}">
             {% csrf_token %}
@@ -24,6 +24,9 @@
           {% csrf_token %}
           <button type="submit">レコードを削除する</button>
         </form>
+          {% for projects in project_lists %}
+          <a href="#" class="w-full text-center block p-6 bg-white border border-gray-200 shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">{{ projects.name }}</a>
+          {% endfor %}
       </div>
       
       
